@@ -1,0 +1,1573 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Academia A - 22 anos sendo a sua cara</title>
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="apple-touch-icon" href="assets/img/logoA.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --cyan: #00d4ff;
+      --cyan-dark: #0097b2;
+      --dark-bg: #0a0a0a;
+      --dark-card: #111111;
+      --dark-card-lighter: #1a1a1a;
+      --white: #ffffff;
+      --gray: #aaaaaa;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--dark-bg);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ============ HEADER / NAV ============ */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 20px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, transparent 100%);
+      transition: background 0.3s;
+    }
+
+    .logo {
+      position: absolute;
+      left: 60px;
+      display: flex;
+      align-items: center;
+    }
+
+    header.scrolled {
+      background: rgba(10, 10, 10, 0.95);
+      backdrop-filter: blur(10px);
+    }
+
+    .logo img {
+      height: 48px;
+      width: auto;
+      border-radius: 50%;
+    }
+
+    nav {
+      display: flex;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50px;
+      padding: 6px;
+      backdrop-filter: blur(10px);
+    }
+
+    nav a {
+      padding: 10px 24px;
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.3s;
+      color: var(--white);
+    }
+
+    nav a:hover,
+    nav a.active {
+      background: var(--cyan);
+      color: var(--dark-bg);
+    }
+
+    /* Mobile menu toggle */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 8px;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      transition: all 0.3s;
+    }
+
+    /* ============ HERO ============ */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 600px;
+      max-width: none;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('assets/img/hero-bg.jpg') center center / cover no-repeat;
+    }
+
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.6) 0%, transparent 25%),
+        linear-gradient(180deg, transparent 60%, var(--dark-bg) 100%),
+        radial-gradient(ellipse at 30% 50%, rgba(0,0,0,0.7) 0%, transparent 70%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .hero-logo {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-bottom: 8px;
+      opacity: 0.9;
+    }
+
+    .hero-text h1 {
+      font-size: 68px;
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -2px;
+    }
+
+    .hero-text h1 strong {
+      font-weight: 900;
+      display: block;
+      font-size: 76px;
+    }
+
+    .hero-text h1 .accent {
+      color: var(--cyan);
+      font-weight: 900;
+    }
+
+    .hero-subtitle {
+      font-size: 16px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.6);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      animation: pulseDown 2s ease-in-out infinite;
+    }
+
+    @keyframes pulseDown {
+      0%, 100% { opacity: 0.4; transform: translateX(-50%) translateY(0); }
+      50% { opacity: 0.8; transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ============ SECTIONS COMMON ============ */
+    section {
+      padding: 80px 60px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 32px;
+      font-weight: 300;
+      margin-bottom: 50px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .section-title strong {
+      font-weight: 800;
+    }
+
+    /* ============ NOSSAS UNIDADES ============ */
+    .unidades {
+      padding-top: 100px;
+    }
+
+    .unidades-grid {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .unidade-card {
+      width: 200px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .unidade-card:hover {
+      transform: translateY(-8px);
+    }
+
+    .unidade-img {
+      width: 200px;
+      height: 200px;
+      border-radius: 24px;
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 16px;
+      box-shadow: 0 8px 30px rgba(0, 212, 255, 0.15);
+      border: 2px solid rgba(0, 212, 255, 0.2);
+    }
+
+    .unidade-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .unidade-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0, 180, 220, 0.3) 0%, rgba(0, 100, 140, 0.6) 100%);
+    }
+
+    .unidade-logo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      width: 60px;
+      height: 60px;
+      background: var(--dark-bg);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--cyan);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .unidade-card h3 {
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--white);
+    }
+
+    /* ============ AULAS COLETIVAS ============ */
+    .aulas {
+      padding-bottom: 60px;
+      overflow: visible;
+    }
+
+    .aulas .section-title {
+      text-align: center;
+    }
+
+    .aulas-grid {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      padding: 30px 0 40px;
+    }
+
+    .aula-card {
+      flex: 1 1 0;
+      max-width: 300px;
+      height: 340px;
+      border-radius: 36px;
+      overflow: hidden;
+      position: relative;
+      background: #0c1117;
+      cursor: pointer;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .aula-card::before {
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      left: 15%;
+      right: 15%;
+      height: 60px;
+      background: radial-gradient(ellipse at center, rgba(0, 212, 255, 0.3) 0%, transparent 70%);
+      z-index: 1;
+      filter: blur(12px);
+      transition: opacity 0.4s;
+      pointer-events: none;
+    }
+
+    .aula-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 36px;
+      border: 1.5px solid rgba(0, 212, 255, 0.12);
+      pointer-events: none;
+      z-index: 3;
+      transition: border-color 0.4s;
+    }
+
+    .aula-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 20px 50px rgba(0, 212, 255, 0.2);
+    }
+
+    .aula-card:hover::before {
+      opacity: 1.5;
+    }
+
+    .aula-card:hover::after {
+      border-color: rgba(0, 212, 255, 0.35);
+    }
+
+    .aula-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: relative;
+      z-index: 2;
+    }
+
+    .aula-card .aula-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      background: linear-gradient(180deg,
+        transparent 0%,
+        transparent 40%,
+        rgba(0, 30, 40, 0.5) 75%,
+        rgba(0, 20, 30, 0.85) 100%
+      );
+      pointer-events: none;
+      border-radius: 36px;
+    }
+
+    .aula-card .aula-label {
+      position: absolute;
+      bottom: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 4;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--white);
+      white-space: nowrap;
+    }
+
+    /* ============ POR QUE A ACADEMIA ============ */
+    .porque {
+      padding-top: 60px;
+      padding-bottom: 100px;
+    }
+
+    .porque .section-title .brand {
+      display: block;
+      font-size: 48px;
+      font-weight: 900;
+      color: var(--cyan);
+      margin-top: 4px;
+    }
+
+    .porque-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .porque-card {
+      border-radius: 20px;
+      overflow: hidden;
+      background: var(--dark-card);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .porque-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(0, 212, 255, 0.1);
+    }
+
+    .porque-card-img {
+      width: 100%;
+      height: 250px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .porque-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .porque-card-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 30%, rgba(0, 0, 0, 0.8) 100%);
+    }
+
+    .porque-card-img h3 {
+      position: absolute;
+      bottom: 20px;
+      left: 24px;
+      z-index: 2;
+      font-size: 18px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .porque-card-body {
+      padding: 24px;
+    }
+
+    .porque-card-body p {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--gray);
+      margin-bottom: 24px;
+    }
+
+    .btn-ver-mais {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--cyan);
+      position: relative;
+      padding: 0 0 4px 0;
+      display: inline-block;
+      transition: color 0.3s;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-ver-mais::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--cyan);
+      transition: width 0.3s;
+    }
+
+    .btn-ver-mais:hover::after {
+      width: 60%;
+    }
+
+    /* Porque Modal Body */
+    .porque-modal-body {
+      display: block;
+      padding: 32px;
+    }
+
+    .porque-modal-img {
+      width: 100%;
+      height: 220px;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .porque-modal-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .porque-modal-text h4 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--cyan);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+
+    .porque-modal-text p {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--gray);
+      margin-bottom: 14px;
+    }
+
+    .porque-modal-text ul {
+      list-style: none;
+      padding: 0;
+      margin: 16px 0 0;
+    }
+
+    .porque-modal-text ul li {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--gray);
+      padding: 8px 0;
+      padding-left: 24px;
+      position: relative;
+      line-height: 1.6;
+    }
+
+    .porque-modal-text ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 14px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--cyan);
+    }
+
+    /* ============ GRADES DE AULAS ============ */
+    .grades {
+      padding-top: 60px;
+      padding-bottom: 100px;
+    }
+
+    .grades-grid {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .grade-card {
+      width: calc(33.333% - 16px);
+      max-width: 380px;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      background: var(--dark-card);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .grade-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(0, 212, 255, 0.2);
+    }
+
+    .grade-card-img {
+      width: 100%;
+      height: 180px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .grade-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s;
+    }
+
+    .grade-card:hover .grade-card-img img {
+      transform: scale(1.08);
+    }
+
+    .grade-card-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0, 180, 220, 0.15) 0%, rgba(0, 50, 70, 0.5) 100%);
+    }
+
+    .grade-card-body {
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .grade-card-body h3 {
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .grade-card-body .grade-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--cyan), var(--cyan-dark));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.3s;
+    }
+
+    .grade-card:hover .grade-icon {
+      transform: scale(1.1);
+    }
+
+    .grade-card-body .grade-icon svg {
+      color: var(--dark-bg);
+    }
+
+    .grade-badge {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--cyan);
+      background: rgba(0, 212, 255, 0.1);
+      padding: 4px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    /* ============ MODAL ============ */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+      padding: 40px;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-content {
+      position: relative;
+      max-width: 800px;
+      width: 100%;
+      max-height: 90vh;
+      background: var(--dark-card);
+      border-radius: 24px;
+      overflow: hidden;
+      transform: scale(0.9) translateY(20px);
+      transition: transform 0.3s;
+      border: 1px solid rgba(0, 212, 255, 0.15);
+    }
+
+    .modal-overlay.active .modal-content {
+      transform: scale(1) translateY(0);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 28px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .modal-header h3 {
+      font-size: 20px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .modal-header h3 span {
+      color: var(--cyan);
+    }
+
+    .modal-close {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: transparent;
+      color: var(--white);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      flex-shrink: 0;
+    }
+
+    .modal-close:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+
+    .modal-tabs {
+      display: none;
+      gap: 8px;
+      padding: 16px 28px 0;
+      flex-wrap: wrap;
+    }
+
+    .modal-tabs.has-tabs {
+      display: flex;
+    }
+
+    .modal-tab {
+      padding: 8px 20px;
+      border-radius: 50px;
+      border: 1.5px solid rgba(255, 255, 255, 0.12);
+      background: transparent;
+      color: var(--gray);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      white-space: nowrap;
+    }
+
+    .modal-tab:hover {
+      border-color: rgba(0, 212, 255, 0.4);
+      color: var(--white);
+    }
+
+    .modal-tab.active {
+      background: var(--cyan);
+      border-color: var(--cyan);
+      color: var(--dark-bg);
+    }
+
+    .modal-body {
+      padding: 24px;
+      overflow-y: auto;
+      max-height: calc(90vh - 80px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-tabs.has-tabs + .modal-body {
+      max-height: calc(90vh - 140px);
+    }
+
+    .modal-body img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      display: block;
+    }
+
+    .modal-body .placeholder-msg {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--gray);
+    }
+
+    .modal-body .placeholder-msg svg {
+      margin-bottom: 16px;
+      color: var(--cyan);
+    }
+
+    .modal-body .placeholder-msg p {
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .modal-body .placeholder-msg strong {
+      color: var(--white);
+      display: block;
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    /* ============ FOOTER ============ */
+    footer {
+      background: linear-gradient(135deg, var(--cyan) 0%, #4dd0e1 50%, #26c6da 100%);
+      padding: 50px 60px;
+    }
+
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-logo img {
+      height: 56px;
+      width: auto;
+      border-radius: 50%;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 32px;
+    }
+
+    .footer-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--dark-bg);
+      transition: opacity 0.3s;
+    }
+
+    .footer-links a:hover {
+      opacity: 0.7;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 16px;
+    }
+
+    .footer-social a {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--dark-bg);
+      transition: background 0.3s;
+    }
+
+    .footer-social a:hover {
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    .footer-bottom {
+      max-width: 1400px;
+      margin: 30px auto 0;
+      padding-top: 20px;
+      border-top: 1px solid rgba(0, 0, 0, 0.15);
+      text-align: center;
+      font-size: 12px;
+      color: rgba(10, 10, 10, 0.6);
+    }
+
+    /* ============ RESPONSIVE ============ */
+    @media (max-width: 1024px) {
+      header {
+        padding: 16px 24px;
+        justify-content: space-between;
+      }
+
+      .logo {
+        position: static;
+      }
+
+      nav {
+        display: none;
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: rgba(10, 10, 10, 0.98);
+        flex-direction: column;
+        border-radius: 0;
+        padding: 20px;
+        gap: 4px;
+      }
+
+      nav.open {
+        display: flex;
+      }
+
+      nav a {
+        border-radius: 12px;
+        padding: 14px 20px;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+
+      section {
+        padding: 60px 24px;
+      }
+
+      .hero-content {
+        padding: 0 24px;
+      }
+
+      .hero-text h1 {
+        font-size: 42px;
+      }
+
+      .hero-text h1 strong {
+        font-size: 48px;
+      }
+
+      .hero-logo {
+        width: 64px;
+        height: 64px;
+      }
+
+      .hero-subtitle {
+        font-size: 12px;
+        letter-spacing: 2px;
+      }
+
+      .unidades-grid {
+        gap: 16px;
+      }
+
+      .unidade-card {
+        width: 150px;
+      }
+
+      .unidade-img {
+        width: 150px;
+        height: 150px;
+        border-radius: 18px;
+      }
+
+      .porque-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .grade-card {
+        width: calc(50% - 12px);
+      }
+
+      .modal-overlay {
+        padding: 20px;
+      }
+
+      footer {
+        padding: 40px 24px;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        gap: 24px;
+        text-align: center;
+      }
+
+      .footer-links {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero-text h1 {
+        font-size: 32px;
+      }
+
+      .hero-text h1 strong {
+        font-size: 38px;
+      }
+
+      .hero-logo {
+        width: 56px;
+        height: 56px;
+      }
+
+      .section-title {
+        font-size: 24px;
+      }
+
+      .unidades-grid {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .unidade-card {
+        width: 130px;
+      }
+
+      .unidade-img {
+        width: 130px;
+        height: 130px;
+        border-radius: 16px;
+      }
+
+      .unidade-logo {
+        width: 44px;
+        height: 44px;
+        font-size: 22px;
+        border-radius: 10px;
+      }
+
+      .aulas-grid {
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+
+      .aula-card {
+        flex: 0 1 calc(50% - 12px);
+        max-width: none;
+        height: 280px;
+        border-radius: 28px;
+      }
+
+      .aula-card::after {
+        border-radius: 28px;
+      }
+
+      .aula-card .aula-overlay {
+        border-radius: 28px;
+      }
+
+      .grade-card {
+        width: 100%;
+        max-width: none;
+      }
+
+      .grade-card-img {
+        height: 140px;
+      }
+
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ HEADER ============ -->
+  <header id="header">
+    <a href="#" class="logo"><img src="assets/img/logoA.png" alt="A Academia"></a>
+    <nav id="mainNav">
+      <a href="#hero" class="active">Inicio</a>
+      <a href="#unidades">Unidades</a>
+      <a href="#grades">Grades de Aulas</a>
+    </nav>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <img src="assets/img/logoA.png" alt="A Academia" class="hero-logo">
+      <div class="hero-text">
+        <h1>22 anos sendo<br><strong><span class="accent">A</span> sua cara.</strong></h1>
+      </div>
+      <p class="hero-subtitle">Sousas &bull; Taquaral &bull; Paulínia &bull; Cambuí &bull; Nova Campinas</p>
+    </div>
+    <div class="hero-scroll">
+      <span>Scroll</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </div>
+  </section>
+
+  <!-- ============ NOSSAS UNIDADES ============ -->
+  <section class="unidades" id="unidades">
+    <h2 class="section-title">NOSSAS <strong>UNIDADES</strong></h2>
+    <div class="unidades-grid">
+      <a href="#" class="unidade-card">
+        <div class="unidade-img">
+          <img src="assets/img/unidade-sousas.jpg" alt="Unidade Sousas" loading="lazy">
+          <div class="unidade-logo">A</div>
+        </div>
+        <h3>Sousas</h3>
+      </a>
+      <a href="#" class="unidade-card">
+        <div class="unidade-img">
+          <img src="assets/img/unidade-taquaral.jpg" alt="Unidade Taquaral" loading="lazy">
+          <div class="unidade-logo">A</div>
+        </div>
+        <h3>Taquaral</h3>
+      </a>
+      <a href="#" class="unidade-card">
+        <div class="unidade-img">
+          <img src="assets/img/unidade-paulinia.jpg" alt="Unidade Paulínia" loading="lazy">
+          <div class="unidade-logo">A</div>
+        </div>
+        <h3>Paulínia</h3>
+      </a>
+      <a href="#" class="unidade-card">
+        <div class="unidade-img">
+          <img src="assets/img/unidade-cambui.jpg" alt="Unidade Cambuí" loading="lazy">
+          <div class="unidade-logo">A</div>
+        </div>
+        <h3>Cambuí</h3>
+      </a>
+      <a href="#" class="unidade-card">
+        <div class="unidade-img">
+          <img src="assets/img/unidade-nova-campinas.jpg" alt="Unidade Nova Campinas" loading="lazy">
+          <div class="unidade-logo">A</div>
+        </div>
+        <h3>Nova Campinas</h3>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ AULAS COLETIVAS ============ -->
+  <section class="aulas" id="aulas">
+    <h2 class="section-title">Aulas <strong>COLETIVAS</strong></h2>
+    <div class="aulas-grid">
+      <div class="aula-card">
+        <img src="assets/img/aula-ginastica.jpg" alt="Ginástica" loading="lazy">
+        <div class="aula-overlay"></div>
+        <span class="aula-label">Ginástica</span>
+      </div>
+      <div class="aula-card">
+        <img src="assets/img/aula-musculacao.jpg" alt="Musculação" loading="lazy">
+        <div class="aula-overlay"></div>
+        <span class="aula-label">Musculação</span>
+      </div>
+      <div class="aula-card">
+        <img src="assets/img/aula-natacao-adulto.jpg" alt="Natação Adulto" loading="lazy">
+        <div class="aula-overlay"></div>
+        <span class="aula-label">Natação Adulto</span>
+      </div>
+      <div class="aula-card">
+        <img src="assets/img/aula-natacao-infantil.jpg" alt="Natação Infantil" loading="lazy">
+        <div class="aula-overlay"></div>
+        <span class="aula-label">Natação Infantil</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ POR QUE A ACADEMIA ============ -->
+  <section class="porque" id="planos">
+    <h2 class="section-title">
+      POR QUE A <strong>ACADEMIA</strong>
+      <span class="brand">A</span>
+    </h2>
+    <div class="porque-grid">
+      <div class="porque-card">
+        <div class="porque-card-img">
+          <img src="assets/img/card-profissionais.jpg" alt="Profissionais" loading="lazy">
+          <h3>Profissionais</h3>
+        </div>
+        <div class="porque-card-body">
+          <p>Contamos com uma equipe de profissionais altamente qualificados, prontos para orientar e motivar você em cada etapa da sua jornada fitness, garantindo resultados seguros e eficientes.</p>
+          <button class="btn-ver-mais" data-porque="profissionais">VER MAIS</button>
+        </div>
+      </div>
+      <div class="porque-card">
+        <div class="porque-card-img">
+          <img src="assets/img/card-metodologia.jpg" alt="Metodologia" loading="lazy">
+          <h3>Metodologia</h3>
+        </div>
+        <div class="porque-card-body">
+          <p>Nossa metodologia exclusiva combina ciência do esporte com acompanhamento personalizado, criando treinos eficazes que respeitam seus limites e potencializam seus objetivos.</p>
+          <button class="btn-ver-mais" data-porque="metodologia">VER MAIS</button>
+        </div>
+      </div>
+      <div class="porque-card">
+        <div class="porque-card-img">
+          <img src="assets/img/card-infraestrutura.jpg" alt="Infraestrutura" loading="lazy">
+          <h3>Infraestrutura</h3>
+        </div>
+        <div class="porque-card-body">
+          <p>Infraestrutura moderna e completa com equipamentos de última geração, ambientes climatizados e espaços amplos para que você treine com total conforto e segurança.</p>
+          <button class="btn-ver-mais" data-porque="infraestrutura">VER MAIS</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MODAL PORQUE ============ -->
+  <div class="modal-overlay" id="porqueModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="porqueModalTitle">Titulo</h3>
+        <button class="modal-close" id="porqueModalClose" aria-label="Fechar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="modal-body porque-modal-body" id="porqueModalBody"></div>
+    </div>
+  </div>
+
+  <!-- ============ GRADES DE AULAS ============ -->
+  <section class="grades" id="grades">
+    <h2 class="section-title">ACOMPANHE NOSSAS <strong>GRADES DE AULAS</strong></h2>
+    <div class="grades-grid">
+      <!-- Linha 1: 3 filiais -->
+      <div class="grade-card" data-filial="Sousas" data-grades='[]'>
+        <div class="grade-card-img">
+          <img src="assets/img/unidade-sousas.jpg" alt="Unidade Sousas" loading="lazy">
+        </div>
+        <div class="grade-card-body">
+          <h3>Sousas</h3>
+          <span class="grade-badge">Em breve</span>
+          <div class="grade-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="grade-card" data-filial="Taquaral" data-grades='[{"nome":"Ginástica","img":"assets/img/grades/taquaral-ginastica.png"}]'>
+        <div class="grade-card-img">
+          <img src="assets/img/unidade-taquaral.jpg" alt="Unidade Taquaral" loading="lazy">
+        </div>
+        <div class="grade-card-body">
+          <h3>Taquaral</h3>
+          <span class="grade-badge">1 grade</span>
+          <div class="grade-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="grade-card" data-filial="Paulínia" data-grades='[{"nome":"Ginástica","img":"assets/img/grades/paulinia-ginastica.png"}]'>
+        <div class="grade-card-img">
+          <img src="assets/img/unidade-paulinia.jpg" alt="Unidade Paulínia" loading="lazy">
+        </div>
+        <div class="grade-card-body">
+          <h3>Paulínia</h3>
+          <span class="grade-badge">1 grade</span>
+          <div class="grade-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+          </div>
+        </div>
+      </div>
+      <!-- Linha 2: 2 filiais (centralizadas) -->
+      <div class="grade-card" data-filial="Cambuí" data-grades='[{"nome":"Ginástica","img":"assets/img/grades/cambui-ginastica.png"},{"nome":"Natação Adulto","img":"assets/img/grades/cambui-natacao-adulto.png"},{"nome":"Natação Infantil","img":"assets/img/grades/cambui-natacao-infantil.png"}]'>
+        <div class="grade-card-img">
+          <img src="assets/img/unidade-cambui.jpg" alt="Unidade Cambuí" loading="lazy">
+        </div>
+        <div class="grade-card-body">
+          <h3>Cambuí</h3>
+          <span class="grade-badge">3 grades</span>
+          <div class="grade-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="grade-card" data-filial="Nova Campinas" data-grades='[{"nome":"Ginástica","img":"assets/img/grades/nova-campinas-ginastica.png"},{"nome":"Natação Infantil","img":"assets/img/grades/nova-campinas-natacao-infantil.png"}]'>
+        <div class="grade-card-img">
+          <img src="assets/img/unidade-nova-campinas.jpg" alt="Unidade Nova Campinas" loading="lazy">
+        </div>
+        <div class="grade-card-body">
+          <h3>Nova Campinas</h3>
+          <span class="grade-badge">2 grades</span>
+          <div class="grade-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MODAL GRADE ============ -->
+  <div class="modal-overlay" id="gradeModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Grade de Aulas - <span id="modalFilialName">Filial</span></h3>
+        <button class="modal-close" id="modalClose" aria-label="Fechar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="modal-tabs" id="modalTabs"></div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-logo"><img src="assets/img/logoA.png" alt="A Academia"></div>
+      <div class="footer-links">
+        <a href="#hero">Inicio</a>
+        <a href="#unidades">Unidades</a>
+        <a href="#aulas">Aulas</a>
+        <a href="#grades">Grades de Aulas</a>
+        <a href="#grades">Grades</a>
+      </div>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/aacademiaoficial/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="Facebook">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="WhatsApp">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 A Academia. Todos os direitos reservados.
+    </div>
+  </footer>
+
+  <!-- ============ SCRIPTS ============ -->
+  <script>
+    // Header scroll effect
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const mainNav = document.getElementById('mainNav');
+    menuToggle.addEventListener('click', () => {
+      mainNav.classList.toggle('open');
+    });
+
+    // Close mobile menu on link click
+    mainNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mainNav.classList.remove('open');
+      });
+    });
+
+    // Active nav on scroll
+    const sections = document.querySelectorAll('section[id]');
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY + 100;
+      sections.forEach(section => {
+        const top = section.offsetTop;
+        const height = section.offsetHeight;
+        const id = section.getAttribute('id');
+        const link = mainNav.querySelector(`a[href="#${id}"]`);
+        if (link) {
+          link.classList.toggle('active', scrollY >= top && scrollY < top + height);
+        }
+      });
+    });
+
+    // Grade modal
+    const modal = document.getElementById('gradeModal');
+    const modalFilialName = document.getElementById('modalFilialName');
+    const modalTabs = document.getElementById('modalTabs');
+    const modalBody = document.getElementById('modalBody');
+    const modalClose = document.getElementById('modalClose');
+
+    function showGradeImage(imgSrc, nome, filial) {
+      modalBody.innerHTML = `<img src="${imgSrc}" alt="Grade ${nome} - ${filial}">`;
+    }
+
+    function setActiveTab(index) {
+      modalTabs.querySelectorAll('.modal-tab').forEach((tab, i) => {
+        tab.classList.toggle('active', i === index);
+      });
+    }
+
+    document.querySelectorAll('.grade-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const filial = card.dataset.filial;
+        const grades = JSON.parse(card.dataset.grades);
+        modalFilialName.textContent = filial;
+
+        // No grades available
+        if (grades.length === 0) {
+          modalTabs.innerHTML = '';
+          modalTabs.classList.remove('has-tabs');
+          modalBody.innerHTML = `
+            <div class="placeholder-msg">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+              <strong>Grade de aulas em breve</strong>
+              <p>A grade desta unidade será disponibilizada em breve.</p>
+            </div>`;
+          modal.classList.add('active');
+          document.body.style.overflow = 'hidden';
+          return;
+        }
+
+        // Build tabs if more than 1 grade
+        if (grades.length > 1) {
+          modalTabs.innerHTML = grades.map((g, i) =>
+            `<button class="modal-tab${i === 0 ? ' active' : ''}" data-index="${i}">${g.nome}</button>`
+          ).join('');
+          modalTabs.classList.add('has-tabs');
+
+          modalTabs.querySelectorAll('.modal-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+              const idx = parseInt(tab.dataset.index);
+              setActiveTab(idx);
+              showGradeImage(grades[idx].img, grades[idx].nome, filial);
+            });
+          });
+        } else {
+          modalTabs.innerHTML = '';
+          modalTabs.classList.remove('has-tabs');
+        }
+
+        // Show first grade
+        showGradeImage(grades[0].img, grades[0].nome, filial);
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    function closeModal() {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeModal();
+        closePorqueModal();
+      }
+    });
+
+    // Porque modal
+    const porqueModal = document.getElementById('porqueModal');
+    const porqueModalTitle = document.getElementById('porqueModalTitle');
+    const porqueModalBody = document.getElementById('porqueModalBody');
+    const porqueModalClose = document.getElementById('porqueModalClose');
+
+    const porqueData = {
+      profissionais: {
+        title: 'Profissionais',
+        img: 'assets/img/card-profissionais.jpg',
+        subtitle: 'Equipe qualificada e dedicada ao seu resultado',
+        paragraphs: [
+          'Na A Academia, acreditamos que o acompanhamento profissional faz toda a diferença. Nossa equipe é formada por profissionais com formação superior em Educação Física, certificações reconhecidas e experiência comprovada no mercado fitness.',
+          'Cada aluno recebe atenção individualizada desde o primeiro dia, com avaliação física completa, prescrição de treino personalizada e acompanhamento contínuo para garantir evolução segura e consistente.'
+        ],
+        items: [
+          'Educadores físicos com registro no CREF',
+          'Avaliação física e prescrição individualizada',
+          'Acompanhamento periódico de resultados',
+          'Equipe treinada em primeiros socorros',
+          'Professores especialistas em cada modalidade'
+        ]
+      },
+      metodologia: {
+        title: 'Metodologia',
+        img: 'assets/img/card-metodologia.jpg',
+        subtitle: 'Ciência e prática unidas pela sua evolução',
+        paragraphs: [
+          'Nossa metodologia é baseada em princípios científicos do treinamento esportivo, aliados a décadas de experiência prática. Desenvolvemos programas que respeitam a individualidade biológica de cada aluno, garantindo progressão adequada e resultados duradouros.',
+          'Trabalhamos com periodização estruturada, variabilidade de estímulos e monitoramento contínuo para que cada sessão de treino contribua de forma efetiva para os seus objetivos.'
+        ],
+        items: [
+          'Periodização e progressão planejada de treinos',
+          'Treinos funcionais, musculação e atividades aquáticas',
+          'Avaliações periódicas para ajuste de programa',
+          'Abordagem personalizada para cada objetivo',
+          'Integração entre diferentes modalidades'
+        ]
+      },
+      infraestrutura: {
+        title: 'Infraestrutura',
+        img: 'assets/img/card-infraestrutura.jpg',
+        subtitle: 'Espaços modernos pensados para o seu conforto',
+        paragraphs: [
+          'Nossas 5 unidades em Campinas e região contam com infraestrutura completa e moderna. Investimos continuamente em equipamentos de última geração das melhores marcas nacionais e internacionais para oferecer a melhor experiência de treino.',
+          'Ambientes climatizados, amplos e bem iluminados, com piscinas aquecidas, salas de aula coletiva, espaço funcional e área de musculação completa. Tudo pensado para que você treine com segurança e conforto.'
+        ],
+        items: [
+          'Equipamentos de ponta das melhores marcas',
+          'Piscinas semiolímpicas aquecidas',
+          'Salas climatizadas para aulas coletivas',
+          'Vestiários completos com armários individuais',
+          'Estacionamento próprio nas unidades'
+        ]
+      }
+    };
+
+    function openPorqueModal(key) {
+      const data = porqueData[key];
+      if (!data) return;
+
+      porqueModalTitle.textContent = data.title;
+      porqueModalBody.innerHTML = `
+        <div class="porque-modal-img">
+          <img src="${data.img}" alt="${data.title}">
+        </div>
+        <div class="porque-modal-text">
+          <h4>${data.subtitle}</h4>
+          ${data.paragraphs.map(p => `<p>${p}</p>`).join('')}
+          <ul>
+            ${data.items.map(item => `<li>${item}</li>`).join('')}
+          </ul>
+        </div>
+      `;
+
+      porqueModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePorqueModal() {
+      porqueModal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.btn-ver-mais[data-porque]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        openPorqueModal(btn.dataset.porque);
+      });
+    });
+
+    porqueModalClose.addEventListener('click', closePorqueModal);
+    porqueModal.addEventListener('click', (e) => {
+      if (e.target === porqueModal) closePorqueModal();
+    });
+  </script>
+
+</body>
+</html>
