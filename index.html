@@ -179,9 +179,16 @@
       font-size: 76px;
     }
 
-    .hero-text h1 .accent {
-      color: var(--cyan);
-      font-weight: 900;
+    .inline-logo {
+      border-radius: 50%;
+      vertical-align: middle;
+    }
+
+    .hero-text h1 .accent-logo {
+      height: 0.85em;
+      width: auto;
+      margin-right: 2px;
+      vertical-align: baseline;
     }
 
     .hero-subtitle {
@@ -424,10 +431,12 @@
 
     .porque .section-title .brand {
       display: block;
-      font-size: 48px;
-      font-weight: 900;
-      color: var(--cyan);
-      margin-top: 4px;
+      margin-top: 12px;
+    }
+
+    .brand-logo {
+      height: 60px;
+      width: auto;
     }
 
     .porque-grid {
@@ -1110,7 +1119,7 @@
     <div class="hero-content">
       <img src="assets/img/logoA.png" alt="A Academia" class="hero-logo">
       <div class="hero-text">
-        <h1>22 anos sendo<br><strong><span class="accent">A</span> sua cara.</strong></h1>
+        <h1>22 anos sendo<br><strong><img src="assets/img/logoA.png" alt="A" class="inline-logo accent-logo"> sua cara.</strong></h1>
       </div>
       <p class="hero-subtitle">Sousas &bull; Taquaral &bull; Paulínia &bull; Cambuí &bull; Nova Campinas</p>
     </div>
@@ -1193,7 +1202,7 @@
   <section class="porque" id="planos">
     <h2 class="section-title">
       POR QUE A <strong>ACADEMIA</strong>
-      <span class="brand">A</span>
+      <span class="brand"><img src="assets/img/logoA.png" alt="A" class="inline-logo brand-logo"></span>
     </h2>
     <div class="porque-grid">
       <div class="porque-card">
