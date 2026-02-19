@@ -580,6 +580,66 @@
       position: absolute;
       inset: 0;
       background: linear-gradient(180deg, transparent 40%, rgba(0, 30, 50, 0.5) 100%);
+      pointer-events: none;
+    }
+
+    .porque-carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 3;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255, 255, 255, 0.4);
+      background: rgba(0, 0, 0, 0.4);
+      color: var(--white);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      backdrop-filter: blur(4px);
+    }
+
+    .porque-carousel-btn:hover {
+      background: var(--cyan);
+      border-color: var(--cyan);
+      color: var(--dark-bg);
+    }
+
+    .porque-carousel-prev { left: 12px; }
+    .porque-carousel-next { right: 12px; }
+
+    .porque-carousel-dots {
+      position: absolute;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      display: flex;
+      gap: 8px;
+    }
+
+    .porque-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.6);
+      background: transparent;
+      cursor: pointer;
+      padding: 0;
+      transition: all 0.3s;
+    }
+
+    .porque-dot.active {
+      background: var(--cyan);
+      border-color: var(--cyan);
+      box-shadow: 0 0 8px rgba(0, 212, 255, 0.5);
+    }
+
+    .porque-dot:hover {
+      border-color: var(--white);
     }
 
     .porque-modal-text {
@@ -1513,7 +1573,7 @@
       </div>
       <div class="porque-card">
         <div class="porque-card-img">
-          <img src="assets/img/infraestrutura/nossoespaco.jpg" alt="Infraestrutura" loading="lazy">
+          <img src="assets/img/infraestrutura/nossoespaco2.jpg" alt="Infraestrutura" loading="lazy">
           <h3>Infraestrutura</h3>
         </div>
         <div class="porque-card-body">
@@ -1801,7 +1861,11 @@
     const porqueData = {
       profissionais: {
         title: 'Profissionais',
-        img: 'assets/img/infraestrutura/nossoespaco4.jpg',
+        imgs: [
+          'assets/img/infraestrutura/nossoespaco4.jpg',
+          'assets/img/infraestrutura/nossoespaco10.jpg',
+          'assets/img/infraestrutura/nossoespaco6.jpg'
+        ],
         subtitle: 'Equipe qualificada e dedicada ao seu resultado',
         paragraphs: [
           'Na A Academia, acreditamos que o acompanhamento profissional faz toda a diferença. Nossa equipe é formada por profissionais com formação superior em Educação Física, certificações reconhecidas e experiência comprovada no mercado fitness.',
@@ -1817,7 +1881,12 @@
       },
       metodologia: {
         title: 'Metodologia',
-        img: 'assets/img/infraestrutura/nossoespaco8.jpg',
+        imgs: [
+          'assets/img/infraestrutura/nossoespaco8.jpg',
+          'assets/img/infraestrutura/nossoespaco9.jpg',
+          'assets/img/infraestrutura/nossoespaco3.jpg',
+          'assets/img/infraestrutura/nossoespaco5.jpg'
+        ],
         subtitle: 'Ciência e prática unidas pela sua evolução',
         paragraphs: [
           'Nossa metodologia é baseada em princípios científicos do treinamento esportivo, aliados a décadas de experiência prática. Desenvolvemos programas que respeitam a individualidade biológica de cada aluno, garantindo progressão adequada e resultados duradouros.',
@@ -1833,7 +1902,11 @@
       },
       infraestrutura: {
         title: 'Infraestrutura',
-        img: 'assets/img/infraestrutura/nossoespaco.jpg',
+        imgs: [
+          'assets/img/infraestrutura/nossoespaco2.jpg',
+          'assets/img/infraestrutura/nossoespaco.jpg',
+          'assets/img/infraestrutura/nossoespaco7.jpg'
+        ],
         subtitle: 'Espaços modernos pensados para o seu conforto',
         paragraphs: [
           'Nossas 5 unidades em Campinas e região contam com infraestrutura completa e moderna. Investimos continuamente em equipamentos de última geração das melhores marcas nacionais e internacionais para oferecer a melhor experiência de treino.',
@@ -1849,14 +1922,38 @@
       }
     };
 
+    let porqueCarouselIdx = 0;
+    let porqueCarouselImgs = [];
+
+    function showPorqueSlide(idx) {
+      porqueCarouselIdx = idx;
+      const img = document.getElementById('porqueCarouselImg');
+      if (img) img.src = porqueCarouselImgs[idx];
+      const dots = document.querySelectorAll('.porque-dot');
+      dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+    }
+
     function openPorqueModal(key) {
       const data = porqueData[key];
       if (!data) return;
 
+      porqueCarouselImgs = data.imgs;
+      porqueCarouselIdx = 0;
+
       porqueModalTitle.textContent = data.title;
+      const dotsHTML = data.imgs.length > 1
+        ? `<div class="porque-carousel-dots">${data.imgs.map((_, i) => `<button class="porque-dot${i === 0 ? ' active' : ''}" data-idx="${i}"></button>`).join('')}</div>`
+        : '';
+      const navHTML = data.imgs.length > 1
+        ? `<button class="porque-carousel-btn porque-carousel-prev" id="porqueCarouselPrev"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+           <button class="porque-carousel-btn porque-carousel-next" id="porqueCarouselNext"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>`
+        : '';
+
       porqueModalBody.innerHTML = `
         <div class="porque-modal-img">
-          <img src="${data.img}" alt="${data.title}">
+          <img src="${data.imgs[0]}" alt="${data.title}" id="porqueCarouselImg">
+          ${navHTML}
+          ${dotsHTML}
         </div>
         <div class="porque-modal-text">
           <h4>${data.subtitle}</h4>
@@ -1865,6 +1962,19 @@
             ${data.items.map(item => `<li>${item}</li>`).join('')}
           </ul>
         </div>`;
+
+      // Carousel navigation
+      const prev = document.getElementById('porqueCarouselPrev');
+      const next = document.getElementById('porqueCarouselNext');
+      if (prev) prev.addEventListener('click', () => {
+        showPorqueSlide(porqueCarouselIdx > 0 ? porqueCarouselIdx - 1 : porqueCarouselImgs.length - 1);
+      });
+      if (next) next.addEventListener('click', () => {
+        showPorqueSlide(porqueCarouselIdx < porqueCarouselImgs.length - 1 ? porqueCarouselIdx + 1 : 0);
+      });
+      document.querySelectorAll('.porque-dot').forEach(dot => {
+        dot.addEventListener('click', () => showPorqueSlide(parseInt(dot.dataset.idx)));
+      });
 
       porqueModal.classList.add('active');
       document.body.style.overflow = 'hidden';
